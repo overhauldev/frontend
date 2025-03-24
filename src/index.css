@@ -92,4 +92,19 @@
   .navbar {
     border-style: dashed;
   }
+
+  .custom-radius {
+    border-radius: var(--radius);
+  }
+
+  .container {
+    @apply mx-auto px-4;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
 }
