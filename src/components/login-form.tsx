@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export function LoginForm({
 	className,
@@ -32,15 +33,14 @@ export function LoginForm({
 					body: JSON.stringify({ identifier, password }),
 				}
 			);
-			console.log({ identifier, password });
 			const data = await response.json();
 			if (response.ok) {
-				console.log("Login successful:", data);
+				toast.success("Login successful");
 			} else {
-				console.error("Login failed:", data);
+				toast.error(`Login failed: ${data.error}`);
 			}
 		} catch (error) {
-			console.error("Error:", error);
+			toast.error(`Error: ${error.message}`);
 		}
 	};
 
@@ -85,7 +85,7 @@ export function LoginForm({
 								/>
 							</div>
 							<div className="flex flex-col gap-3">
-								<Button type="submit" className="w-full curser-pointer">
+								<Button type="submit" className="w-full cursor-pointer">
 									Login
 								</Button>
 								<Button variant="outline" className="w-full">
