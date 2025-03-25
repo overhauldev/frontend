@@ -67,7 +67,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground: var (--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -96,11 +96,16 @@
   .custom-radius {
     border-radius: var(--radius);
   }
-
-  .container {
-    @apply mx-auto px-4;
+.container {
+    @apply mx-auto px-4 border-l border-r border-primary border-dashed;
     max-width: 100%;
-  }
+}
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1400px;
+    }
+}
 
   @media (min-width: 1536px) {
     .container {
