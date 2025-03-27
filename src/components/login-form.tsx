@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +19,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
 	const [identifier, setIdentifier] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	const handleLogin = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -36,6 +38,8 @@ export function LoginForm({
 			const data = await response.json();
 			if (response.ok) {
 				toast.success("Login successful");
+				localStorage.setItem("token", data.token); // Store the token
+				navigate("/dashboard"); // Redirect to the dashboard page
 			} else {
 				toast.error(`Login failed: ${data.error}`);
 			}
