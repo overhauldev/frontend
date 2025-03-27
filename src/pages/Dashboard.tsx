@@ -4,6 +4,8 @@ import { DataTable } from "@/components/Dashboard/data-table";
 import { SectionCards } from "@/components/Dashboard/section-cards";
 import { SiteHeader } from "@/components/Dashboard/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Template data for testing purposes
 const data = [
@@ -52,11 +54,50 @@ const data = [
 ];
 
 export default function Page() {
+	const [userId, setUserId] = useState(null);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const fetchDashboardData = async () => {
+			const token = localStorage.getItem("token");
+			if (!token) {
+				navigate("/login"); // Redirect to login if no token
+				return;
+			}
+
+			try {
+				const response = await fetch(
+					`${import.meta.env.VITE_APP_API_URL}/dashboard`,
+					{
+						method: "GET",
+						headers: {
+							Authorization: token,
+						},
+					}
+				);
+				if (response.ok) {
+					const data = await response.json();
+					setUserId(data.userId); // Set user ID from the response
+				} else {
+					navigate("/login"); // Redirect to login if token is invalid
+				}
+			} catch (error) {
+				console.error("Error fetching dashboard data:", error);
+				navigate("/login");
+			}
+		};
+
+		fetchDashboardData();
+	}, [navigate]);
 	return (
 		<SidebarProvider>
 			<AppSidebar variant="inset" />
 			<SidebarInset>
 				<SiteHeader />
+				<div>
+					<h1>Welcome to the Dashboard</h1>
+					{userId && <p>Your User ID: {userId}</p>}
+				</div>
 				<div className="flex flex-1 flex-col">
 					<div className="@container/main flex flex-1 flex-col gap-2">
 						<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
