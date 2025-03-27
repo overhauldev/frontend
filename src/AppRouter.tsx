@@ -1,8 +1,8 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routes } from "@/routes";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Toaster } from "@/components/ui/sonner";
+import { Layout } from "@/layout";
+
 const AppRoutes = () => {
 	return useRoutes(routes);
 };
@@ -11,12 +11,10 @@ export const AppRouter = () => {
 	return (
 		<ThemeProvider>
 			<BrowserRouter>
-				<div className="relative min-h-screen">
+				<Layout>
 					<AppRoutes />
-					<ModeToggle />
-				</div>
+				</Layout>
 			</BrowserRouter>
-			<Toaster position="bottom-center" />
 		</ThemeProvider>
 	);
 };
