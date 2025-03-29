@@ -6,6 +6,12 @@ import { defineConfig } from "vite"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  optimizeDeps: {
+    include: ["react", "react-dom"], // Pre-bundle frequently used dependencies
+  },
+  build: {
+    sourcemap: false, // Disable source maps for faster builds
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

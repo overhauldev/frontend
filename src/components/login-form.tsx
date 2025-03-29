@@ -44,7 +44,11 @@ export function LoginForm({
 				toast.error(`Login failed: ${data.error}`);
 			}
 		} catch (error) {
-			toast.error(`Error: ${error.message}`);
+			toast.error(
+				`Error: ${
+					error instanceof Error ? error.message : "An unknown error occurred"
+				}`
+			);
 		}
 	};
 

@@ -1,12 +1,35 @@
-// src/routes.tsx
+import React from "react";
 import { RouteObject } from "react-router-dom";
-import TestPage from "@/pages/TestPage";
-import LandingPage from "@/pages/LandingPage";
-import Dashboard from "@/pages/Dashboard";
+
+import LoadingPage from "@/pages/LoadingPage";
+// Lazy load pages
+const TestPage = React.lazy(() => import("@/pages/TestPage"));
+const LandingPage = React.lazy(() => import("@/pages/LandingPage"));
+const Dashboard = React.lazy(() => import("@/app/dashboard/Dashboard"));
 
 export const routes: RouteObject[] = [
-	{ path: "/", element: <LandingPage /> },
-	{ path: "/home", element: <LandingPage /> },
-	{ path: "/login", element: <TestPage /> },
-	{ path: "/dashboard", element: <Dashboard /> },
+	{
+		path: "/",
+		element: (
+			<React.Suspense fallback={<LoadingPage />}>
+				<LandingPage />
+			</React.Suspense>
+		),
+	},
+	{
+		path: "/login",
+		element: (
+			<React.Suspense fallback={<LoadingPage />}>
+				<TestPage />
+			</React.Suspense>
+		),
+	},
+	{
+		path: "/dashboard/*",
+		element: (
+			<React.Suspense fallback={<LoadingPage />}>
+				<Dashboard />
+			</React.Suspense>
+		),
+	},
 ];
