@@ -63,6 +63,7 @@ export default function Page() {
 	}
 
 	return (
+		<>
 			{/* Wrapping the entire dashboard in ColorProvider */}
 			<SidebarProvider>
 				<AppSidebar
@@ -86,5 +87,6 @@ export default function Page() {
 					</Routes>
 				</SidebarInset>
 			</SidebarProvider>
+		</>
 	);
 }

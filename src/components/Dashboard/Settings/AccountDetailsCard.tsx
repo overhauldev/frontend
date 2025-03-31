@@ -13,7 +13,18 @@ const AccountDetailsCard = ({
 	accountDetails,
 	handleAccountDetailsChange,
 	updateAccountDetails,
-}: any) => {
+}: {
+	accountDetails: {
+		name: string;
+		username: string;
+		email: string;
+		phone: string;
+		zipCode: string;
+		address: string;
+	};
+	handleAccountDetailsChange: (field: string, value: string) => void;
+	updateAccountDetails: () => void;
+}) => {
 	return (
 		<Card>
 			<CardHeader>
