@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+
 import {
 	SidebarGroup,
 	SidebarGroupContent,
@@ -27,13 +28,6 @@ export function NavMain({
 						>
 							<span>Create a booking</span>
 						</SidebarMenuButton>
-						<Button
-							size="icon"
-							className="size-8 group-data-[collapsible=icon]:opacity-0"
-							variant="outline"
-						>
-							<span className="sr-only">Inbox</span>
-						</Button>
 					</SidebarMenuItem>
 				</SidebarMenu>
 				<SidebarMenu>

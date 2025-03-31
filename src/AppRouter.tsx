@@ -1,5 +1,6 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ColorProvider } from "@/components/color-provider";
 import { routes } from "@/routes";
 import { Layout } from "@/layout";
 
@@ -10,11 +11,13 @@ const AppRoutes = () => {
 export const AppRouter = () => {
 	return (
 		<ThemeProvider>
-			<BrowserRouter>
-				<Layout>
-					<AppRoutes />
-				</Layout>
-			</BrowserRouter>
+			<ColorProvider>
+				<BrowserRouter>
+					<Layout>
+						<AppRoutes />
+					</Layout>
+				</BrowserRouter>
+			</ColorProvider>
 		</ThemeProvider>
 	);
 };

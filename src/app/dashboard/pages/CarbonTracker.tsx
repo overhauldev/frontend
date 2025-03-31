@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 export default function CarbonTracker() {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 h-screen">
+		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
 			{/* Left Section: Calculator and User Input */}
 			<div className="flex flex-col gap-4">
 				{/* Carbon Footprint Calculator */}

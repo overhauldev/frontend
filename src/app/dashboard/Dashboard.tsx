@@ -9,6 +9,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 // Import content components for each section
 import DashboardHome from "@/app/dashboard/pages/DashboardHome";
 import CarbonTracker from "@/app/dashboard/pages/CarbonTracker";
+import SettingsPage from "@/app/dashboard/pages/SettingsPage";
 
 export default function Page() {
 	interface DashboardData {
@@ -62,21 +63,28 @@ export default function Page() {
 	}
 
 	return (
-		<SidebarProvider>
-			<AppSidebar
-				user={{
-					name: dashboardData.user.username,
-					email: dashboardData.user.email,
-				}}
-				variant="inset"
-			/>
-			<SidebarInset>
-				<SiteHeader />
-				<Routes>
-					<Route path="/" element={<DashboardHome />} />
-					<Route path="carbon-tracker" element={<CarbonTracker />} />
-				</Routes>
-			</SidebarInset>
-		</SidebarProvider>
+			{/* Wrapping the entire dashboard in ColorProvider */}
+			<SidebarProvider>
+				<AppSidebar
+					user={{
+						name: dashboardData.user.username,
+						email: dashboardData.user.email,
+					}}
+					variant="inset"
+				/>
+				<SidebarInset>
+					<SiteHeader />
+					<Routes>
+						<Route path="/" element={<DashboardHome />} />
+						<Route path="carbon-tracker" element={<CarbonTracker />} />
+						<Route
+							path="electricity-tracker"
+							element={<div>Electricity Tracker</div>}
+						/>
+						<Route path="settings" element={<SettingsPage />} />
+						{/* Add more routes as needed */}
+					</Routes>
+				</SidebarInset>
+			</SidebarProvider>
 	);
 }
