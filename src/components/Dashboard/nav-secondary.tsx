@@ -25,9 +25,6 @@ export function NavSecondary({
 				<SidebarMenu>
 					{items.map((item) => {
 						// Debugging: Log the URL and title to ensure correctness
-						console.debug(
-							`Rendering NavSecondary item: ${item.title}, URL: ${item.url}`
-						);
 
 						return (
 							<SidebarMenuItem key={item.title}>

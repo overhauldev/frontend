@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 
 import { ColorSelector } from "@/components/color-selector";
-
+import { FontSelector } from "@/components/font-selector";
 const AccessibilityCard = () => {
 	return (
 		<Card className="flex-1">
@@ -16,8 +16,9 @@ const AccessibilityCard = () => {
 					Accessibility
 				</CardTitle>
 			</CardHeader>
-			<CardContent className="space-y-4">
+			<CardContent className="space-y-4 ">
 				<ColorSelector />
+				<FontSelector />
 			</CardContent>
 			<CardFooter className="text-sm text-accent-foreground">
 				Customize the app's accessibility settings to suit your needs. You can

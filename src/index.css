@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-primary: "Lato", sans-serif;
+  --font-secondary: "Roboto", sans-serif;
+  --font-tertiary: "Georgia", sans-serif;
+  --font-quaternary: "Inter", sans-serif;
   --radius: 1rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -113,6 +118,21 @@
   --primary: #0ff; /* Cyan */
   --primary-foreground: #000;
 }
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
+}
+
+.font-tertiary {
+  font-family: var(--font-tertiary);
+}
+
+.font-quaternary {
+  font-family: var(--font-quaternary);
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -157,6 +177,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-primary); /* Default font */
   }
 
   .navbar {

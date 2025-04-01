@@ -1,6 +1,7 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ColorProvider } from "@/components/color-provider";
+import { FontProvider } from "@/components/font-provider";
 import { routes } from "@/routes";
 import { Layout } from "@/layout";
 
@@ -10,14 +11,16 @@ const AppRoutes = () => {
 
 export const AppRouter = () => {
 	return (
-		<ThemeProvider>
-			<ColorProvider>
-				<BrowserRouter>
-					<Layout>
-						<AppRoutes />
-					</Layout>
-				</BrowserRouter>
-			</ColorProvider>
-		</ThemeProvider>
+		<FontProvider>
+			<ThemeProvider>
+				<ColorProvider>
+					<BrowserRouter>
+						<Layout>
+							<AppRoutes />
+						</Layout>
+					</BrowserRouter>
+				</ColorProvider>
+			</ThemeProvider>
+		</FontProvider>
 	);
 };
