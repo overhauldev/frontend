@@ -28,6 +28,7 @@ export function AppSidebar({
 			{ title: "Dashboard", url: "/dashboard" },
 			{ title: "Carbon Tracker", url: "/dashboard/carbon-tracker" },
 			{ title: "Electricity Tracker", url: "/dashboard/electricity-tracker" },
+			{ title: "Information", url: "/dashboard/info" },
 		],
 		navSecondary: [{ title: "Settings", url: "/dashboard/settings" }],
 	};

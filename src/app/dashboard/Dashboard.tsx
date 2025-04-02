@@ -10,6 +10,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import DashboardHome from "@/app/dashboard/pages/DashboardHome";
 import CarbonTracker from "@/app/dashboard/pages/CarbonTracker";
 import SettingsPage from "@/app/dashboard/pages/SettingsPage";
+import InfoPage from "@/app/dashboard/pages/InfoPage";
 
 export default function Page() {
 	const { dashboardData } = useDashboardData();
@@ -37,6 +38,7 @@ export default function Page() {
 							element={<div>Electricity Tracker</div>}
 						/>
 						<Route path="settings" element={<SettingsPage />} />
+						<Route path="info" element={<InfoPage />} />
 					</Routes>
 				</SidebarInset>
 			</SidebarProvider>

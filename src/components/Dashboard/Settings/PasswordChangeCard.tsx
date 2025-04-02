@@ -43,7 +43,11 @@ const PasswordChangeCard = () => {
 			setConfirmPassword("");
 		} catch (error) {
 			console.error("Error updating password:", error);
-			toast.error(error.message || "Failed to update password");
+			toast.error(
+				(error instanceof Error
+					? error.message
+					: "An unknown error occurred") || "Failed to update password"
+			);
 		}
 	};
 

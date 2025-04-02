@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChartBarLeaderboard } from "@/components/Dashboard/chart-bar-leaderboard";
+
 export default function CarbonTracker() {
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">

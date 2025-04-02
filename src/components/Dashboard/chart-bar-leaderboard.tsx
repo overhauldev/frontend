@@ -1,6 +1,5 @@
 "use client";
 import { useDashboardData } from "@/context/dashboard-data-provider";
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis, Tooltip } from "recharts";
 
 import {
@@ -59,6 +58,11 @@ export function ChartBarLeaderboard() {
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
+							tick={{
+								fill: "var(--foreground)", // Customize the color
+								fontSize: 12,
+								fontWeight: "bold",
+							}} // Customize the color and style
 						/>
 						<Tooltip content={<ChartTooltipContent hideLabel />} />
 						<Bar
