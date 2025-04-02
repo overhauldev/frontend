@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { z } from "zod";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 // Define the schema using Zod
-const bookingSchema = z.object({
-	meetingType: z.enum(["Booking", "Consultation"], {
-		required_error: "Meeting type is required",
-	}),
-	productInstall: z.string().optional(),
-	date: z.string().optional(), // Placeholder for the date picker
-});
+const bookingSchema = z
+	.object({
+		meetingType: z.enum(["Booking", "Consultation"], {
+			required_error: "Meeting type is required",
+		}),
+		productInstall: z.string().optional(),
+		date: z
+			.string({
+				required_error: "Date is required",
+			})
+			.refine((value) => !isNaN(Date.parse(value)), {
+				message:
+					"Date must be in a valid datetime format (e.g., YYYY-MM-DDTHH:mm)",
+			}),
+	})
+	.refine((data) => data.meetingType !== "Booking" || data.productInstall, {
+		message: "Product Install is required for Booking",
+		path: ["productInstall"],
+	});
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
 const BookingForm = () => {
-	const [meetingType, setMeetingType] = useState<string>("");
 	const {
 		register,
 		handleSubmit,
-		control,
 		watch,
 		formState: { errors },
 	} = useForm<BookingFormValues>({
@@ -33,21 +43,20 @@ const BookingForm = () => {
 
 	// Handle form submission
 	const onSubmit = (data: BookingFormValues) => {
-		const formattedMessage = `${data.meetingType}
-			${data.productInstall ? `${data.productInstall}` : ""}
-			${data.date ? `${data.date}` : ""}
-		`;
+		const formattedMessage = `
+            Booking has been created with the following details:
+            - Meeting Type: ${data.meetingType}
+            ${
+							data.productInstall
+								? `- Product Install: ${data.productInstall}`
+								: ""
+						}
+            - Date: ${data.date}
+        `;
 
 		console.log("Form Data:", data);
-		toast("Booking created", {
-			description: formattedMessage,
-			action: {
-				label: "Undo",
-				onClick: () => {
-					console.log("Undo action clicked");
-				},
-			},
-			duration: 5000,
+		toast(formattedMessage, {
+			duration: 3000,
 		});
 	};
 
@@ -63,7 +72,6 @@ const BookingForm = () => {
 				</label>
 				<select
 					{...register("meetingType")}
-					onChange={(e) => setMeetingType(e.target.value)}
 					className="mt-1 block w-full rounded-md border-accent-foreground bg-background shadow-sm sm:text-sm"
 				>
 					<option value="">Select a meeting type</option>
@@ -106,14 +114,20 @@ const BookingForm = () => {
 				</div>
 			)}
 
-			{/* Date Picker Placeholder */}
+			{/* Date Input */}
 			<div>
 				<label className="block text-sm font-medium text-foreground">
 					Date
 				</label>
-				<div className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 h-10 flex items-center justify-center text-gray-500">
-					Date Picker Placeholder
-				</div>
+				<input
+					type="datetime-local"
+					{...register("date")}
+					placeholder="Enter a date"
+					className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+				/>
+				{errors.date && (
+					<p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
+				)}
 			</div>
 
 			{/* Submit Button */}
