@@ -21,14 +21,11 @@ export function ColorProvider({
 	defaultColor = "green",
 	storageKey = "vite-ui-color",
 }: ColorProviderProps) {
-	console.log("ColorProvider is rendering"); // Debugging
-
 	const [color, setColor] = useState<ColorTheme>(
 		() => (localStorage.getItem(storageKey) as ColorTheme) || defaultColor
 	);
 
 	useEffect(() => {
-		console.log("ColorProvider initialized with color:", color); // Debugging
 		const root = window.document.documentElement;
 
 		// Remove all color theme classes
@@ -49,7 +46,6 @@ export function ColorProvider({
 }
 export function useColor() {
 	const context = useContext(ColorProviderContext);
-	console.log("useColor context:", context); // Debugging
 	if (context === undefined) {
 		throw new Error("useColor must be used within a ColorProvider");
 	}

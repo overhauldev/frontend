@@ -5,7 +5,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useColor } from "@/components/color-provider";
+import { useColor } from "@/context/color-provider";
 
 export function ColorSelector() {
 	const { color, setColor } = useColor();

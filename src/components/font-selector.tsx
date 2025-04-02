@@ -5,7 +5,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useFont } from "@/components/font-provider";
+import { useFont } from "@/context/font-provider";
 
 export function FontSelector() {
 	const { font, setFont } = useFont();

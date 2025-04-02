@@ -22,13 +22,11 @@ export function FontProvider({
 	defaultFont = "primary",
 	storageKey = "vite-ui-font",
 }: FontProviderProps) {
-	console.log("FontProvider is rendering"); // Debugging
 	const [font, setFont] = useState<FontType>(
 		() => (localStorage.getItem(storageKey) as FontType) || defaultFont
 	);
 
 	useEffect(() => {
-		console.log("FontProvider initialized with font:", font); // Debugging
 		const root = document.documentElement;
 
 		// Remove all font classes
@@ -44,8 +42,6 @@ export function FontProvider({
 
 		// Persist the selected font in localStorage
 		localStorage.setItem(storageKey, font);
-
-		console.log("FontProvider updated font:", font); // Debugging
 	}, [font]);
 
 	return (

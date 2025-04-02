@@ -7,6 +7,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ChartBarLeaderboard } from "@/components/Dashboard/chart-bar-leaderboard";
 export default function CarbonTracker() {
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
@@ -66,25 +67,8 @@ export default function CarbonTracker() {
 			</div>
 
 			{/* Right Section: Graph */}
-			<div className="flex items-center justify-center">
-				<Card className="w-full h-full shadow-lg">
-					<CardHeader>
-						<CardTitle className="text-2xl text-center font-bold">
-							Carbon Footprint Graph
-						</CardTitle>
-						<CardDescription className="text-center">
-							Visualize your carbon footprint data.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<div className="w-full h-[50vh] md:h-[80vh]">
-							{/* Placeholder for Graph */}
-							<div className="w-full h-full bg-gray-100 border rounded-lg flex items-center justify-center">
-								<p className="text-gray-500">Graph will be displayed here.</p>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
+			<div className="flex items-center justify-center w-full shadow-lg flex-1">
+				<ChartBarLeaderboard />
 			</div>
 		</div>
 	);
