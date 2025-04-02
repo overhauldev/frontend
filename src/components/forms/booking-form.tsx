@@ -17,8 +17,14 @@ const bookingSchema = z
 				required_error: "Date is required",
 			})
 			.refine((value) => !isNaN(Date.parse(value)), {
-				message:
-					"Date must be in a valid datetime format (e.g., YYYY-MM-DDTHH:mm)",
+				message: "Date must be in a valid format (e.g., YYYY-MM-DD)",
+			}),
+		time: z
+			.string({
+				required_error: "Time is required",
+			})
+			.refine((value) => /^([01]\d|2[0-3]):([0-5]\d)$/.test(value), {
+				message: "Time must be in a valid format (e.g., HH:mm)",
 			}),
 	})
 	.refine((data) => data.meetingType !== "Booking" || data.productInstall, {
@@ -43,6 +49,9 @@ const BookingForm = () => {
 
 	// Handle form submission
 	const onSubmit = (data: BookingFormValues) => {
+		// Combine date and time into a single datetime string
+		const datetime = `${data.date}T${data.time}`;
+
 		const formattedMessage = `
             Booking has been created with the following details:
             - Meeting Type: ${data.meetingType}
@@ -51,10 +60,10 @@ const BookingForm = () => {
 								? `- Product Install: ${data.productInstall}`
 								: ""
 						}
-            - Date: ${data.date}
+            - Date and Time: ${datetime}
         `;
 
-		console.log("Form Data:", data);
+		console.log("Form Data:", { ...data, datetime });
 		toast(formattedMessage, {
 			duration: 3000,
 		});
@@ -120,13 +129,29 @@ const BookingForm = () => {
 					Date
 				</label>
 				<input
-					type="datetime-local"
+					type="date"
 					{...register("date")}
 					placeholder="Enter a date"
 					className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
 				/>
 				{errors.date && (
 					<p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
+				)}
+			</div>
+
+			{/* Time Input */}
+			<div>
+				<label className="block text-sm font-medium text-foreground">
+					Time
+				</label>
+				<input
+					type="time"
+					{...register("time")}
+					placeholder="Enter a time"
+					className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+				/>
+				{errors.time && (
+					<p className="text-red-500 text-sm mt-1">{errors.time.message}</p>
 				)}
 			</div>
 
